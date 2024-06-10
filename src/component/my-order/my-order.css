@@ -1,0 +1,31 @@
+.order{
+    display: flex;
+    justify-content: center;
+    
+}
+.order table{
+    width:500px;
+}
+.order table th,
+.order table td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.order table th {
+    background-color: rgb(6, 6, 6);
+    color: white;
+}
+@media(max-width:600px){
+    .order table{
+        width:400px;
+    }
+}
+@media(max-width:420px){
+    .order table{
+        width:280px;
+    }
+}
+

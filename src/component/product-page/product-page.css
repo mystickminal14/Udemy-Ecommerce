@@ -1,0 +1,118 @@
+.pro-page {
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+    position: relative;
+}
+
+.pro-page .off-canvas {
+    background: white;
+    box-shadow: 0px 0px 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 80px;
+    gap: 1.3em;
+    width: 300px;
+    left: -100%; 
+    height: 100%;
+    justify-content: start;
+    transition: left 0.3s ease-in-out; 
+}
+
+.pro-page .off-canvas.showCanvas {
+    left: 0;
+}
+
+.pro-page .off-canvas .pro-title {
+    align-self: flex-start;
+    width: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 1.3rem;
+}
+
+.pro-title h1 {
+    font-family: 'roboto';
+}
+
+.pro-page .off-canvas hr {
+    width: 80%;
+    margin-top: -20px;
+    border: 1px solid #3c3636;
+}
+
+.pro-page .off-canvas .pro-links a {
+    display: flex;
+    justify-content: start;
+    width: 280px;
+    gap:1em;
+    padding: 0.6em;
+    font-family: 'hammersmith one';
+    align-items: center;
+    transition: 0.3s ease-in-out;
+}
+
+.pro-page .off-canvas .pro-links a:hover {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.pro-side {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-size:20px;
+    cursor: pointer; 
+}
+.reverse{
+    cursor:pointer;
+}
+.pro-page .pro-cards {
+    margin-left: 300px; 
+    padding: 1em;
+    width: calc(100% - 300px); 
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.pro-page .pro-cards.fullWidth {
+    margin-left: 0;
+    width: 100%; 
+}
+
+.pro-page .pro-cards .pro-card-title {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'roboto';
+    padding: 1em;
+}
+
+.pro-page .pro-cards .pro-card {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: space-evenly;
+}
+
+.pro-card-title h1, .pro-card-title .pro-menu {
+    padding: 0.2em;
+    width:140px;
+}
+
+.pro-card-title h1 {
+    font-weight: bolder;
+    font-size: 1.4rem;
+}
+@media (max-width:1101px){
+    .pro-page{
+        margin-top:180px;
+    }
+    .pro-page .off-canvas {
+        top:180px;
+    }
+}

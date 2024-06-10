@@ -1,0 +1,211 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    height: 60px;
+    font-family: 'hammersmith one';
+    align-items: center;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .links ul li:hover, .navbar .falsy ul li:hover {
+    transform: translateY(-3px);
+    transition: 0.3s ease-in;
+}
+a{
+    display:flex;
+    align-items: center;
+    gap:0.3em;
+}
+.navbar .links ul, .navbar .falsy ul,
+.navbar .falsy ul li, .navbar .links ul li {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    gap: 0.4em;
+}
+
+.navbar .left-nav div {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.navbar .left-nav div button:hover {
+    background: rgb(18, 55, 69);
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.navbar .left-nav div button {
+    border: 2px solid rgb(244, 208, 208);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .links ul, .navbar .falsy ul {
+    gap: 1em;
+    cursor: pointer;
+    height: 40px;
+    padding: 0em 0.6em 0 0.6em;
+}
+
+.navbar .left-nav {
+    display: flex;
+    gap: 5em;
+    align-items: center;
+}
+
+.navbar .left-nav h1 {
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.navbar .left-nav input[type='text'] {
+    width: 400px;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 2px solid rgb(244, 208, 208);
+}
+
+.navbar .links ul li span, .navbar .falsy ul li span {
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.navbar .links ul .counter span, .navbar .falsy ul .counter span {
+    background: skyblue;
+    width: 20px;
+    margin-top: -0px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8em;
+    border-radius: 50%;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.drop-enable {
+    width: 110px;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 40px;
+    left: -20px;
+    background: white;
+    box-shadow: 0px 0px 3px;
+    flex-direction: column;
+    transition: 0.3s ease-in-out;
+    height: 0;
+    overflow: hidden;
+}
+
+.i-cross {
+    display: none;
+}
+
+.navbar .links ul .dropdown:hover, .navbar .falsy ul .dropdown:hover {
+    transform: translateY(0px);
+}
+
+.dropdown:hover .drop-enable {
+    height: 120px;
+}
+
+.drop-enable span {
+    width: 110px;
+    padding: 0.3em;
+    text-align: center;
+}
+
+.drop-enable span:hover {
+    background: black;
+    color: white;
+}
+
+.ibg {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 1em;
+        height: auto;
+    }
+    .navbar .left-nav {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: flex-start;
+    }
+    .navbar .left-nav h1 {
+        align-self: flex-start;
+        justify-self: flex-start;
+    }
+    .navbar .left-nav div{
+        align-self: center;
+    }
+    .navbar .left-nav input[type='text'] {
+        width: 420px;
+        
+    }
+}
+
+@media (max-width: 520px) {
+    .ibg {
+        display: block;
+        position: absolute;
+        font-size: 1.5rem;
+        top: 19px;
+        right: 20px;
+        cursor: pointer;
+    }
+    .navbar .links, .navbar .falsy {
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(4px);
+        position: fixed; 
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        height: 100%;
+        top: 0;
+        right: 0;
+        width: 220px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .navbar .falsy {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+    .navbar .links ul, .navbar .falsy ul {
+        flex-direction: column;
+        margin-top: 50px;
+    }
+    .i-cross {
+        display: block;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+    }
+}
+
+@media (max-width: 435px) {
+    .navbar .left-nav input[type='text'] {
+        width: 240px;
+    }
+}

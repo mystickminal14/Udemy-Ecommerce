@@ -1,0 +1,52 @@
+.hero{
+    color:white;
+    background-color: black;
+    display:flex;
+    justify-content: center;
+    gap:3em;
+    padding:0.3em;
+    flex-wrap:wrap;
+    align-items: center;
+}
+.hero .left-hero {
+    display:flex;
+    flex-direction: column;
+}
+.hero .left-hero h1{
+font-family:roboto;
+font-size:3.5rem;
+}
+.hero .left-hero p{
+    font-size:1.5rem;
+    width:40ch;
+}
+.hero .left-hero button{
+    width:100px;
+    margin-top:33px;
+    border:1px solid white;
+    border-radius: 5px;
+    padding:0.4em;
+}
+.hero .left-hero button:hover{
+    background-color: rgb(78, 81, 82);
+    transition: 0.3s ease-in-out;
+}
+@media (max-width:770px){
+    .hero{
+        flex-direction: column-reverse;
+    }
+    .hero .left-hero{
+        align-items: center;
+    }
+    .hero .left-hero p{
+        text-align: center;
+    }
+}
+@media (max-width:523px){
+.hero .left-hero h1{
+font-size:2rem;
+}
+.hero .left-hero p{
+width:15ch;
+}
+}
