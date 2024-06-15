@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./product-page.css";
 import LinkButton from "./link-button";
 import { SiYoutubegaming } from "react-icons/si";
@@ -8,26 +8,83 @@ import { MdOutlineSmartphone } from "react-icons/md";
 import { IoWatch } from "react-icons/io5";
 import { BsLayoutSidebarInsetReverse } from "react-icons/bs";
 import ProductCard from "../product/product-card";
-import cardImage from '../../assets/file.png';
+import axiosClient from "../../utils/api-client";
 
 export default function ProductPage() {
   const [show, setShow] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+
+  const productData = () => {
+    axiosClient
+      .get("/products")
+      .then((res) => {
+        setProducts(res.data.products);
+      })
+      .catch((error) => setError(error.message));
+
+    axiosClient
+      .get("/category")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((error) => setError(error.message));
+  };
+
+  useEffect(() => {
+    productData();
+  }, []);
+console.log(categories)
+  
+
+  const getCategoryIcon = (name) => {
+    switch (name) {
+      case "Gaming Consoles":
+        return <SiYoutubegaming />;
+      case "Headphones":
+        return <FaHeadphones />;
+      case "Laptops":
+        return <FaLaptop />;
+      case "SmartPhones":
+        return <MdOutlineSmartphone />;
+      case "Smartwatches":
+        return <IoWatch />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
       <div className="pro-page">
-        {!show && <BsLayoutSidebarInsetReverse onClick={() => setShow(true)} className="pro-side" />}
+        {!show && (
+          <BsLayoutSidebarInsetReverse
+            onClick={() => setShow(true)}
+            className="pro-side"
+          />
+        )}
         <div className={`off-canvas ${show ? "showCanvas" : ""}`}>
           <div className="pro-title">
             <h1>Categories</h1>
-            <BsLayoutSidebarInsetReverse className='reverse'onClick={() => setShow(false)} />
+            <BsLayoutSidebarInsetReverse
+              className="reverse"
+              onClick={() => setShow(false)}
+            />
           </div>
           <hr />
-          <LinkButton icon={<SiYoutubegaming />} name="Gaming Console" />
-          <LinkButton icon={<FaHeadphones />} name="Headphones" />
-          <LinkButton icon={<FaLaptop />} name="Laptops and TV" />
-          <LinkButton icon={<MdOutlineSmartphone />} name="Smart Phone" />
-          <LinkButton icon={<IoWatch />} name="Smart watch" />
+          {categories  ? (
+            categories.map((category) => (
+              <LinkButton
+                key={category._id}
+                icon={getCategoryIcon(category.name)}
+                name={category.name}
+                id={category._id}
+              />
+            ))
+          ) : (
+            <em>{error}</em>
+          )}
         </div>
         <div className={`pro-cards ${show ? "" : "fullWidth"}`}>
           <div className="pro-card-title">
@@ -36,25 +93,26 @@ export default function ProductPage() {
               <option value="">Relevance</option>
               <option value="1">Audi</option>
               <option value="2">BMW</option>
-              <option value="3">Citroen</option>
-              <option value="4">Ford</option>
-              <option value="5">Honda</option>
-              <option value="6">Jaguar</option>
-              <option value="7">Land Rover</option>
-              <option value="8">Mercedes</option>
-              <option value="9">Mini</option>
-              <option value="10">Nissan</option>
-              <option value="11">Toyota</option>
-              <option value="12">Volvo</option>
             </select>
           </div>
           <div className="pro-card">
-            <ProductCard image={cardImage} price='4900' title='iphone' rating='4' quantity='4' />
-            <ProductCard image={cardImage} price='4900' title='iphone' rating='4' quantity='4' />
-            <ProductCard image={cardImage} price='4900' title='iphone' rating='4' quantity='4' />
-            <ProductCard image={cardImage} price='4900' title='iphone' rating='4' quantity='4' />
-            <ProductCard image={cardImage} price='4900' title='iphone' rating='4' quantity='4' />
-
+            {products.length > 0 ? (
+              products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  id={product._id}
+                  image={product.images[0]}
+                  price={product.price}
+                  title={product.title}
+                  rating={product.reviews.rate}
+                  quantity={product.stock}
+                />
+              ))
+            ) : (
+              <h1>
+                <em>{error || "No products available"}</em>
+              </h1>
+            )}
           </div>
         </div>
       </div>

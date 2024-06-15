@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LinkButton = ({icon,name}) => {
+const LinkButton = ({id,icon,name}) => {
   return (
     <>
     <div className="pro-links">
